@@ -48,8 +48,9 @@ Parameter | Description | Default
 `keycloak.image.tag` | The Keycloak image tag | `4.1.0.Final`
 `keycloak.image.pullPolicy` | The Keycloak image pull policy | `IfNotPresent`
 `keycloak.image.pullSecrets` | Image pull secrets | `[]`
-`keycloak.username` | Username for the initial Keycloak admin user | `keycloak`
-`keycloak.password` | Password for the initial Keycloak admin user. If not set, a random 10 characters password is created | `""`
+`keycloak.admin.create` | Whether this chart should generate an initial Keycloak admin user | `true`
+`keycloak.admin.username` | Username for the initial Keycloak admin user | `keycloak`
+`keycloak.admin.password` | Password for the initial Keycloak admin user. If not set, a random 10 characters password is created | `""`
 `keycloak.extraInitContainers` | Additional init containers, e. g. for providing themes, etc. Passed through the `tpl` funtion and thus to be configured a string | `""`
 `keycloak.extraContainers` | Additional sidecar containers, e. g. for a database proxy, such as Google's cloudsql-proxy. Passed through the `tpl` funtion and thus to be configured a string | `""`
 `keycloak.extraEnv` | Allows the specification of additional environment variables for Keycloak. Passed through the `tpl` funtion and thus to be configured a string | `""`
