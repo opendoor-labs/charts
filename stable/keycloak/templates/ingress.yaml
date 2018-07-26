@@ -31,7 +31,7 @@ spec:
         paths:
           - path: {{ $ingress.path }}
             backend:
-              serviceName: {{ template "keycloak.fullname" $ }}-http
-              servicePort: http
+              serviceName: {{ template "keycloak.fullname" $ }}-https
+              servicePort: https
   {{- end }}
 {{- end -}}

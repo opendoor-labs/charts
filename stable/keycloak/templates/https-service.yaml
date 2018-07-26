@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "keycloak.fullname" . }}-http
+  name: {{ template "keycloak.fullname" . }}-https
 {{- with $service.annotations }}
   annotations:
 {{ toYaml . | indent 4 }}
@@ -18,9 +18,9 @@ metadata:
 spec:
   type: {{ $service.type }}
   ports:
-    - name: http
+    - name: https
       port: {{ $service.port }}
-      targetPort: http
+      targetPort: https
     {{- if and (eq "NodePort" $service.type) $service.nodePort }}
       nodePort: {{ $service.nodePort }}
     {{- end }}
