@@ -42,10 +42,10 @@ Keycloak can be accessed:
 
 {{- end }}
 
-{{- if .Release.IsInstall }}
+{{- if and .Release.IsInstall .Values.keycloak.admin.create }}
 
 Login with the following credentials:
-Username: {{ .Values.keycloak.username }}
+Username: {{ .Values.keycloak.admin.username }}
 
 To retrieve the initial user password run:
 kubectl get secret --namespace {{ .Release.Namespace }} {{ template "keycloak.fullname" . }}-http -o jsonpath="{.data.password}" | base64 --decode; echo
