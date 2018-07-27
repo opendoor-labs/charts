@@ -153,7 +153,7 @@ keycloak:
       /interface=private:write-attribute(name=nic, value=eth0)
       /interface=private:undefine-attribute(name=inet-address)
 
-    postgresql: |
+    postgresqlDiscovery: |
       # Statements must be adapted for PostgreSQL. Additionally, we add a 'creation_timestamp' column.
       /subsystem=jgroups/stack=tcp/protocol=JDBC_PING/property=initialize_sql:add(value="CREATE TABLE IF NOT EXISTS JGROUPSPING (own_addr varchar(200) NOT NULL, creation_timestamp timestamp NOT NULL, cluster_name varchar(200) NOT NULL, ping_data bytea, constraint PK_JGROUPSPING PRIMARY KEY (own_addr, cluster_name))")
       /subsystem=jgroups/stack=tcp/protocol=JDBC_PING/property=insert_single_sql:add(value="INSERT INTO JGROUPSPING (own_addr, creation_timestamp, cluster_name, ping_data) values (?, NOW(), ?, ?)")
