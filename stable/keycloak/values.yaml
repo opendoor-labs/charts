@@ -136,8 +136,6 @@ keycloak:
       /subsystem=jgroups/stack=tcp/protocol=JDBC_PING/property=break_on_coord_rsp:add(value=true)
 
       /subsystem=jgroups/stack=tcp/protocol=MERGE3:add()
-      /subsystem=jgroups/stack=tcp/protocol=FD_SOCK:add(socket-binding="jgroups-tcp-fd")
-      /subsystem=jgroups/stack=tcp/protocol=FD:add()
       /subsystem=jgroups/stack=tcp/protocol=VERIFY_SUSPECT:add()
       /subsystem=jgroups/stack=tcp/protocol=pbcast.NAKACK2:add()
       /subsystem=jgroups/stack=tcp/protocol=UNICAST3:add()
