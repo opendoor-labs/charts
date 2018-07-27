@@ -11,9 +11,9 @@ spec:
   type: ClusterIP
   clusterIP: None
   ports:
-    - name: http
+    - name: https
       port: {{ .Values.keycloak.service.port }}
-      targetPort: http
+      targetPort: https
       protocol: TCP
   selector:
     app: {{ template "keycloak.name" . }}

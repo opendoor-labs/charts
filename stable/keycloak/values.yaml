@@ -188,7 +188,7 @@ keycloak:
     ## Optional static port assignment for service type NodePort.
     # nodePort: 30000
 
-    port: 80
+    port: 443
 
   ## Ingress configuration.
   ## ref: https://kubernetes.io/docs/user-guide/ingress/
