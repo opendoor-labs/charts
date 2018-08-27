@@ -13,8 +13,10 @@ data:
     #!/usr/bin/env bash
 
     set -eu
+    export SHORTNAME=${HOSTNAME:(-18)}-$(date | md5 | head -c 3)
 
     /opt/jboss/keycloak/bin/jboss-cli.sh --file=/scripts/keycloak.cli
+    /subsystem=transactions:write-attribute(name=node-identifier, value=$SHORTNAME)
 
   {{- with .Values.keycloak.preStartScript }}
     echo 'Running custom pre-start script...'
@@ -28,8 +30,6 @@ data:
     embed-server {{- if $highAvailability }} --server-config=standalone-ha.xml{{ end }} --std-out=echo
 
 {{- with .Values.keycloak.cli }}
-
-{{ .nodeIdentifier | indent 4 }}
 
 {{ .logging | indent 4 }}
 
