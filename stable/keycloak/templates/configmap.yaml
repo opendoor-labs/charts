@@ -13,7 +13,7 @@ data:
     #!/usr/bin/env bash
 
     set -eu
-    export SHORTNAME=${HOSTNAME:(-18)}-$(date | md5 | head -c 3)
+    export SHORTNAME=${HOSTNAME:(-18)}-$(date | md5sum | head -c 3)
 
     /opt/jboss/keycloak/bin/jboss-cli.sh --file=/scripts/keycloak.cli
     /subsystem=transactions:write-attribute(name=node-identifier, value=$SHORTNAME)
