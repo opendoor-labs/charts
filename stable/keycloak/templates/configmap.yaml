@@ -17,7 +17,6 @@ data:
     echo "SHORTNAME=$SHORTNAME"
 
     /opt/jboss/keycloak/bin/jboss-cli.sh --file=/scripts/keycloak.cli
-    /subsystem=transactions:write-attribute(name=node-identifier, value=${env.SHORTNAME})
 
   {{- with .Values.keycloak.preStartScript }}
     echo 'Running custom pre-start script...'
@@ -29,6 +28,7 @@ data:
 
   keycloak.cli: |
     embed-server {{- if $highAvailability }} --server-config=standalone-ha.xml{{ end }} --std-out=echo
+    /subsystem=transactions:write-attribute(name=node-identifier, value=${env.SHORTNAME})
 
 {{- with .Values.keycloak.cli }}
 
