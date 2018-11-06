@@ -36,6 +36,9 @@ spec:
     honorLabels: true
   {{- end }}
   jobLabel: k8s-app
+  {{- if .Values.kubelet.podTargetLabels }}
+  podTargetLabels: {{ .Values.kubelet.podTargetLabels }}
+  {{- end }}
   namespaceSelector:
     matchNames:
     - {{ .Values.kubelet.namespace }}

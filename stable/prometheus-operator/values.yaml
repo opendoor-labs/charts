@@ -330,6 +330,13 @@ kubelet:
     ##
     https: false
 
+  ## Pod Target Labels
+  ## Transfers labels on the Kubernetes Pod onto the target
+  ##
+  # podTargetLabels:
+  #   - env
+  podTargetLabels: []
+
 ## Component scraping the kube controller manager
 ##
 kubeControllerManager:
