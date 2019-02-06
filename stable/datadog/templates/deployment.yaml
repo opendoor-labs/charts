@@ -65,6 +65,10 @@ spec:
           - name: KUBERNETES_COLLECT_EVENTS
             value: "yes"
           {{- end }}
+          {{- if .Values.daemonset.dogstatsdPort }}
+          - name: DD_DOGSTATSD_PORT
+            value: "{{ .Values.daemonset.dogstatsdPort }}"
+          {{- end }}
 {{- if .Values.datadog.env }}
 {{ toYaml .Values.datadog.env | indent 10 }}
 {{- end }}

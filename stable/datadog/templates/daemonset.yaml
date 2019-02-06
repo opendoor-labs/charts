@@ -36,10 +36,8 @@ spec:
         resources:
 {{ toYaml .Values.datadog.resources | indent 12 }}
         ports:
-        - containerPort: 8125
-          {{- if .Values.daemonset.useHostPort }}
-          hostPort: 8125
-          {{- end }}
+        - containerPort: {{ .Values.daemonset.dogstatsdPort }}
+          hostPort: {{ .Values.daemonset.dogstatsdPort }}
           name: dogstatsdport
           protocol: UDP
         {{- if .Values.datadog.apmEnabled }}
@@ -56,6 +54,8 @@ spec:
               secretKeyRef:
                 name: {{ template "datadog.apiSecretName" . }}
                 key: api-key
+          - name: DD_DOGSTATSD_PORT
+            value: {{ quote .Values.daemonset.dogstatsdPort }}
           {{- if .Values.datadog.logLevel }}
           - name: DD_LOG_LEVEL
             value: {{ .Values.datadog.logLevel | quote }}
