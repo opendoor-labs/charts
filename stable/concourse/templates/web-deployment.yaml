@@ -221,7 +221,7 @@ spec:
             {{- end }}
             {{- if .Values.postgresql.enabled }}
             - name: CONCOURSE_POSTGRES_HOST
-              value: {{ template "concourse.postgresql.fullname" . }}
+              value: "{{ "concourse.cvb433if7xgh.us-east-1.rds.amazonaws.com" }}"
             - name: CONCOURSE_POSTGRES_USER
               value: {{ .Values.postgresql.postgresUser | quote }}
             - name: CONCOURSE_POSTGRES_PASSWORD

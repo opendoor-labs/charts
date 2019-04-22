@@ -98,7 +98,7 @@ concourse:
     ##
     ## Example: http://ci.concourse-ci.org
     ##
-    externalUrl:
+    externalUrl: https://concourse.odmortgage.com
 
     ## URL used to reach this ATC from other ATCs in the cluster.
     ## By default, this corresponds to `$(POD_IP):$(CONCOURSE_BIND_PORT)`.
@@ -1011,7 +1011,7 @@ concourse:
 
       ## Enable a proxy DNS server for Garden
       ##
-      dnsProxyEnable:
+      dnsProxyEnable: 8.8.8.8
 
       ## Use the insecure Houdini Garden backend.
       ##
@@ -1270,7 +1270,7 @@ web:
   ingress:
     ## Enable Ingress.
     ##
-    enabled: false
+    enabled: true
 
     ## Annotations to be added to the web ingress.
     ## Example:
@@ -1285,7 +1285,7 @@ web:
     ##   - concourse.domain.com
     ##
     hosts:
-
+      - concourse.odmortgage.com
     ## TLS configuration.
     ## Secrets must be manually created in the namespace.
     ## Example:
@@ -1310,7 +1310,7 @@ worker:
 
   ## Number of replicas.
   ##
-  replicas: 2
+  replicas: 3
 
   ## Array of extra containers to run alongside the Concourse worker
   ## container.
