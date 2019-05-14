@@ -51,6 +51,7 @@ Parameter | Description | Default
 `config.google.adminEmail` | user impersonated by the google service account | `""`
 `config.google.serviceAccountJson` | google service account json contents | `""`
 `config.google.existingConfig` | existing Kubernetes configmap to use for the service account file. See [google secret template](https://github.com/helm/charts/blob/master/stable/oauth2-proxy/templates/google-secret.yaml) for the required values | `nil`
+`command` | list of strings used as the initial command & arguments, to which args, extraArgs are appended | None
 `extraArgs` | key:value list of extra arguments to give the binary | `{}`
 `extraEnv` | key:value list of extra environment variables to give the binary | `[]`
 `htpasswdFile.enabled` | enable htpasswd-file option | `false`

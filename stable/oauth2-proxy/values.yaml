@@ -39,6 +39,9 @@ image:
 # imagePullSecrets:
   # - name: myRegistryKeySecretName
 
+# Optionally specify an explicit command array in kubernetes
+# command: [ "/oauth2_proxy"]
+
 extraArgs: {}
 extraEnv: []
 

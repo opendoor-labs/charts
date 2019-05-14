@@ -37,6 +37,9 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- with .Values.command }}
+        command: {{ . }}
+        {{- end }}
         args:
           - --http-address=0.0.0.0:4180
         {{- range $key, $value := .Values.extraArgs }}
