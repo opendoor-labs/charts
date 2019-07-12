@@ -52,6 +52,10 @@ spec:
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
           {{- end }}
           imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
+          {{- if .Values.web.command }}
+          command:
+          {{- toYaml .Values.web.command | nindent 12 }}
+          {{- end }}
           args:
             - web
           env:
