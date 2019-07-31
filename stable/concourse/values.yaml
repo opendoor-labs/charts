@@ -1753,7 +1753,7 @@ postgresql:
   ##
   ## Should be set to false if using the chart as a worker only deployment.
   ##
-  enabled: true
+  enabled: false
 
   ### PostgreSQL User to create.
   ##
