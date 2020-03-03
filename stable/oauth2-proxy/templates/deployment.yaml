@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   labels:
     app: {{ template "oauth2-proxy.name" . }}
+    team: {{ default "" .Values.team }}
+    org: {{ default "" .Values.org }}
     chart: {{ template "oauth2-proxy.chart" . }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
@@ -21,6 +23,8 @@ spec:
     {{- end }}
       labels:
         app: {{ template "oauth2-proxy.name" . }}
+        team: {{ default "" .Values.team }}
+        org: {{ default "" .Values.org }}
         release: "{{ .Release.Name }}"
       {{- if .Values.podLabels }}
 {{ toYaml .Values.podLabels | indent 8 }}

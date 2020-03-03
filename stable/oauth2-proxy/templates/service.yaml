@@ -3,6 +3,8 @@ kind: Service
 metadata:
   labels:
     app: {{ template "oauth2-proxy.name" . }}
+    team: {{ default "" .Values.team }}
+    org: {{ default "" .Values.org }}
     chart: {{ template "oauth2-proxy.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
