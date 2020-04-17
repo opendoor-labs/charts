@@ -686,7 +686,7 @@ concourse:
       - name: SPLUNK_HEC_URL
         value: https://http-inputs-opendoor.splunkcloud.com:443
       - name: SPLUNK_HEC_TOKEN
-        value: od_secret:concourse/engineering/concourse-web/splunk_hec_token#value
+        value: od_secret:secret/kubernetes/concourse/concourse-web/splunk#hec_token
 
     auth:
       ## Force sending secure flag on http cookies
