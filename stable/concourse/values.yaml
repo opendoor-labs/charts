@@ -655,7 +655,7 @@ concourse:
       ## Enables the emission of build logs to external log ingesters through
       ## using the syslog protocol.
       ##
-      enabled: false
+      enabled: true
 
       ## Client hostname with which the build logs will be sent to the syslog server.
       ##
@@ -663,11 +663,11 @@ concourse:
 
       ## Remote syslog server address with port (Example: 0.0.0.0:514).
       ##
-      address:
+      address: localhost:514
 
       ## Transport protocol for syslog messages (Currently supporting tcp, udp & tls).
       ##
-      transport:
+      transport: udp
 
       ## Interval over which checking is done for new build logs to send to syslog server
       ## (duration measurement units are s/m/h; eg. 30s/30m/1h)
@@ -677,6 +677,16 @@ concourse:
       ## and provide a value for the cert in secrets (`syslog-ca-cert`).
       ##
       useCaCert: false
+
+    sidecarContainers:
+    - name: atc-syslog
+      image: splunk/scs
+      ## See https://splunk-connect-for-syslog.readthedocs.io/en/master/gettingstarted/docker-systemd-general/#configure-the-sc4s-environment
+      env:
+      - name: SPLUNK_HEC_URL
+        value: https://http-inputs-opendoor.splunkcloud.com:443  # Or get from vault
+      - name: SPLUNK_HEC_TOKEN
+        value: # TODO: get from vault
 
     auth:
       ## Force sending secure flag on http cookies
