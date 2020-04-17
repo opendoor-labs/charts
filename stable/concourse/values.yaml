@@ -684,9 +684,9 @@ concourse:
       ## See https://splunk-connect-for-syslog.readthedocs.io/en/master/gettingstarted/docker-systemd-general/#configure-the-sc4s-environment
       env:
       - name: SPLUNK_HEC_URL
-        value: https://http-inputs-opendoor.splunkcloud.com:443  # Or get from vault
+        value: https://http-inputs-opendoor.splunkcloud.com:443
       - name: SPLUNK_HEC_TOKEN
-        value: # TODO: get from vault
+        value: od_secret:concourse/engineering/concourse-web/splunk_hec_token#value
 
     auth:
       ## Force sending secure flag on http cookies
