@@ -1295,6 +1295,9 @@ web:
   sidecarContainers:
   - name: atc-syslog
     image: splunk/scs
+    ## We must explicitly set a command for od-secret.
+    ## See https://github.com/opendoor-labs/od-secret/blob/master/README.md#important
+    command: ["/entrypoint.sh", "-F"]
     ## See https://splunk-connect-for-syslog.readthedocs.io/en/master/gettingstarted/docker-systemd-general/#configure-the-sc4s-environment
     env:
     - name: SPLUNK_HEC_URL
