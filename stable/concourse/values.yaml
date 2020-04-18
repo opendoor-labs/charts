@@ -678,16 +678,6 @@ concourse:
       ##
       useCaCert: false
 
-    sidecarContainers:
-    - name: atc-syslog
-      image: splunk/scs
-      ## See https://splunk-connect-for-syslog.readthedocs.io/en/master/gettingstarted/docker-systemd-general/#configure-the-sc4s-environment
-      env:
-      - name: SPLUNK_HEC_URL
-        value: https://http-inputs-opendoor.splunkcloud.com:443
-      - name: SPLUNK_HEC_TOKEN
-        value: od_secret:secret/kubernetes/concourse/concourse-web/splunk#hec_token
-
     auth:
       ## Force sending secure flag on http cookies
       ##
@@ -1302,7 +1292,15 @@ web:
   ##   image: busybox
   ##   command: ['sh', '-c', 'echo Hello && sleep 3600']
   ##
-  sidecarContainers: []
+  sidecarContainers:
+  - name: atc-syslog
+    image: splunk/scs
+    ## See https://splunk-connect-for-syslog.readthedocs.io/en/master/gettingstarted/docker-systemd-general/#configure-the-sc4s-environment
+    env:
+    - name: SPLUNK_HEC_URL
+      value: https://http-inputs-opendoor.splunkcloud.com:443
+    - name: SPLUNK_HEC_TOKEN
+      value: od_secret:secret/kubernetes/concourse/concourse-web/splunk#hec_token
 
   ## Configures the liveness probe used to determine if the Web component is up.
   ## ps.: if you're upgrading Concourse from one version  to another, the probe will
