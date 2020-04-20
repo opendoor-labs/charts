@@ -655,7 +655,7 @@ concourse:
       ## Enables the emission of build logs to external log ingesters through
       ## using the syslog protocol.
       ##
-      enabled: false
+      enabled: true
 
       ## Client hostname with which the build logs will be sent to the syslog server.
       ##
@@ -663,11 +663,11 @@ concourse:
 
       ## Remote syslog server address with port (Example: 0.0.0.0:514).
       ##
-      address:
+      address: localhost:514
 
       ## Transport protocol for syslog messages (Currently supporting tcp, udp & tls).
       ##
-      transport:
+      transport: tcp
 
       ## Interval over which checking is done for new build logs to send to syslog server
       ## (duration measurement units are s/m/h; eg. 30s/30m/1h)
@@ -1292,7 +1292,23 @@ web:
   ##   image: busybox
   ##   command: ['sh', '-c', 'echo Hello && sleep 3600']
   ##
-  sidecarContainers: []
+  sidecarContainers:
+  - name: atc-syslog
+    image: splunk/scs:v1.15.2
+    ## Set the index to concourse by writing to a special file splunk_index.csv. Our token only has write access to this index.
+    command:
+    - bash
+    - -c
+    - |
+      mkdir -p /opt/syslog-ng/etc/conf.d/local/context/ ;
+      echo sc4s_fallback,index,concourse >/opt/syslog-ng/etc/conf.d/local/context/splunk_index.csv ;
+      /entrypoint.sh -F
+    ## See https://splunk-connect-for-syslog.readthedocs.io/en/master/gettingstarted/docker-systemd-general/#configure-the-sc4s-environment
+    env:
+    - name: SPLUNK_HEC_URL
+      value: https://http-inputs-opendoor.splunkcloud.com:443/services/collector/event
+    - name: SPLUNK_HEC_TOKEN
+      value: od_secret:secret/kubernetes/concourse/concourse-web/splunk#hec_token
 
   ## Configures the liveness probe used to determine if the Web component is up.
   ## ps.: if you're upgrading Concourse from one version  to another, the probe will
