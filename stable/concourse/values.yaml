@@ -667,7 +667,7 @@ concourse:
 
       ## Transport protocol for syslog messages (Currently supporting tcp, udp & tls).
       ##
-      transport: udp
+      transport: tcp
 
       ## Interval over which checking is done for new build logs to send to syslog server
       ## (duration measurement units are s/m/h; eg. 30s/30m/1h)
@@ -1301,7 +1301,7 @@ web:
     ## See https://splunk-connect-for-syslog.readthedocs.io/en/master/gettingstarted/docker-systemd-general/#configure-the-sc4s-environment
     env:
     - name: SPLUNK_HEC_URL
-      value: https://http-inputs-opendoor.splunkcloud.com:443
+      value: https://http-inputs-opendoor.splunkcloud.com:443/services/collector/event
     - name: SPLUNK_HEC_TOKEN
       value: od_secret:secret/kubernetes/concourse/concourse-web/splunk#hec_token
 
