@@ -1303,7 +1303,7 @@ web:
       bash /entrypoint.sh -F &
       PID=$! ;
       echo sc4s_fallback,index,concourse >>/opt/syslog-ng/etc/conf.d/local/context/splunk_index.csv ;
-      kill -SIGHUP $!
+      kill -SIGHUP $PID
     ## See https://splunk-connect-for-syslog.readthedocs.io/en/master/gettingstarted/docker-systemd-general/#configure-the-sc4s-environment
     env:
     - name: SPLUNK_HEC_URL
