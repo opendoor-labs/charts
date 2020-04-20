@@ -1304,6 +1304,8 @@ web:
       value: https://http-inputs-opendoor.splunkcloud.com:443/services/collector/event
     - name: SPLUNK_HEC_TOKEN
       value: od_secret:secret/kubernetes/concourse/concourse-web/splunk#hec_token
+    - name: SC4S_DEST_GLOBAL_ALTERNATES  # FIXME: debugging, remove
+      value: d_hec_debug
 
   ## Configures the liveness probe used to determine if the Web component is up.
   ## ps.: if you're upgrading Concourse from one version  to another, the probe will
