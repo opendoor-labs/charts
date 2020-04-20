@@ -1294,18 +1294,25 @@ web:
   ##
   sidecarContainers:
   - name: atc-syslog
-    image: splunk/scs
+    image: splunk/scs:v1.15.2
     ## We must explicitly set a command for od-secret.
     ## See https://github.com/opendoor-labs/od-secret/blob/master/README.md#important
-    command: ["/entrypoint.sh", "-F"]
+    command:
+    - bash
+    - -c
+    - |
+      bash /entrypoint.sh -F &
+      PID=$!
+      # Set the index to concourse. Our token only has write access to this index.
+      echo sc4s_fallback,index,concourse >>/opt/syslog-ng/etc/conf.d/local/context/splunk_index.csv
+      # Restart syslog
+      kill -SIGHUP $!
     ## See https://splunk-connect-for-syslog.readthedocs.io/en/master/gettingstarted/docker-systemd-general/#configure-the-sc4s-environment
     env:
     - name: SPLUNK_HEC_URL
       value: https://http-inputs-opendoor.splunkcloud.com:443/services/collector/event
     - name: SPLUNK_HEC_TOKEN
       value: od_secret:secret/kubernetes/concourse/concourse-web/splunk#hec_token
-    - name: SC4S_DEST_GLOBAL_ALTERNATES  # FIXME: debugging, remove
-      value: d_hec_debug
 
   ## Configures the liveness probe used to determine if the Web component is up.
   ## ps.: if you're upgrading Concourse from one version  to another, the probe will
